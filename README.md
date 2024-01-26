@@ -53,3 +53,11 @@ npx prisma migrate dev
 # administration studio
 npx prisma studio
 ```
+
+## NestJS Pipes
+
+https://docs.nestjs.com/pipes#class-validator
+
+```sh
+npm i --save class-validator class-transformer
+```
