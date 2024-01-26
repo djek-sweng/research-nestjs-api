@@ -33,7 +33,17 @@ https://www.prisma.io/
 ```sh
 cd ./server
 
+# install dependencies
 npm i prisma --save-dev
-
 npm i @prisma/client --save
+
+# verify installation
+npx prisma --version
+npx prisma --help
+
+# initialise
+npx prisma init
+
+# database schema migration
+npx prisma migrate dev
 ```
