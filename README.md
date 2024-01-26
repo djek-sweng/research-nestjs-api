@@ -31,6 +31,8 @@ docker compose up --remove-orphans -d
 https://www.prisma.io/
 
 ```sh
+cd ./server
+
 npm i prisma --save-dev
 
 npm i @prisma/client --save
