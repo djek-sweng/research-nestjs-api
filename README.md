@@ -59,5 +59,13 @@ npx prisma studio
 https://docs.nestjs.com/pipes#class-validator
 
 ```sh
-npm i --save class-validator class-transformer
+npm i class-validator class-transformer --save
+```
+
+## Hash and Verify
+
+https://www.npmjs.com/package/argon2
+
+```sh
+npm i argon2 --save
 ```
