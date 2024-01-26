@@ -14,8 +14,11 @@ npm i -g @nestjs/cli
 # generate project named server
 nest new server
 
-# generate module named auth
+# generate auth module
 nest g module auth
+
+# generate auth service
+nest g service auth --no-spec
 ```
 
 ## Run Postgres inside Docker
@@ -46,4 +49,7 @@ npx prisma init
 
 # database schema migration
 npx prisma migrate dev
+
+# administration studio
+npx prisma studio
 ```
