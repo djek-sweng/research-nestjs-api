@@ -11,10 +11,10 @@ npm i -g @nestjs/cli
 ## NestJS CLI Commands
 
 ```sh
-# generate project
+# generate project named server
 nest new server
 
-# generate modules
+# generate module named auth
 nest g module auth
 ```
 
@@ -24,4 +24,14 @@ nest g module auth
 cd ./tools/docker/postgres
 
 docker compose up --remove-orphans -d
+```
+
+## Prisma ORM
+
+https://www.prisma.io/
+
+```sh
+npm i prisma --save-dev
+
+npm i @prisma/client --save
 ```
