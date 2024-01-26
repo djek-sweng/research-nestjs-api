@@ -17,3 +17,11 @@ nest new server
 # generate modules
 nest g module auth
 ```
+
+## Run Postgres inside Docker
+
+```sh
+cd ./tools/docker/postgres
+
+docker compose up --remove-orphans -d
+```
