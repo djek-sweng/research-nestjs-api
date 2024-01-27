@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
 @Injectable()
 export class DbService extends PrismaClient {
@@ -11,5 +11,9 @@ export class DbService extends PrismaClient {
         },
       },
     });
+  }
+
+  findUserByEmail(email: string): Promise<User> {
+    return this.user.findFirst({ where: { email: email } });
   }
 }
