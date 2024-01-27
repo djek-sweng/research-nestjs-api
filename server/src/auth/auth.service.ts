@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { DbService } from 'src/db/db.service';
-import { SignupDto } from './dto';
-import { hash } from 'argon2';
+import { SigninDto, SignupDto } from './dto';
+import { hash, verify } from 'argon2';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +25,21 @@ export class AuthService {
     return user;
   }
 
-  signin() {
-    return { message: 'I am signed in' };
+  async signin(dto: SigninDto) {
+    const user = await this.db.findUserByEmail(dto.email);
+
+    if (!user) {
+      throw new ForbiddenException('Invalid email or password.');
+    }
+
+    const isValid = await verify(user.passwordHash, dto.password);
+
+    if (!isValid) {
+      throw new ForbiddenException('Invalid email or password.');
+    }
+
+    delete user.passwordHash;
+
+    return user;
   }
 }

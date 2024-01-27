@@ -14,6 +14,6 @@ export class DbService extends PrismaClient {
   }
 
   findUserByEmail(email: string): Promise<User> {
-    return this.user.findFirst({ where: { email: email } });
+    return this.user.findUnique({ where: { email: email } });
   }
 }
