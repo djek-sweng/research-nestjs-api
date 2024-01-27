@@ -75,5 +75,13 @@ npm i argon2 --save
 https://docs.nestjs.com/techniques/configuration
 
 ```sh
-npm i --save @nestjs/config
+npm i @nestjs/config --save
+```
+
+## Authentication with JWT Bearer
+
+https://docs.nestjs.com/security/authentication
+
+```sh
+npm i @nestjs/jwt --save
 ```
