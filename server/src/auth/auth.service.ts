@@ -8,7 +8,9 @@ export class AuthService {
   constructor(private db: DbService) {}
 
   async signup(dto: SignupDto) {
-    let user = await this.db.findUserByEmail(dto.email);
+    const email = dto.email.toLowerCase();
+
+    let user = await this.db.findUserByEmail(email);
 
     if (user) {
       throw new ForbiddenException('Email already signed up.');
@@ -17,7 +19,7 @@ export class AuthService {
     const passwordHash = await hash(dto.password);
 
     user = await this.db.user.create({
-      data: { email: dto.email, passwordHash: passwordHash, name: dto.name },
+      data: { email: email, passwordHash: passwordHash, name: dto.name },
     });
 
     delete user.passwordHash;
@@ -26,7 +28,9 @@ export class AuthService {
   }
 
   async signin(dto: SigninDto) {
-    const user = await this.db.findUserByEmail(dto.email);
+    const email = dto.email.toLowerCase();
+
+    const user = await this.db.findUserByEmail(email);
 
     if (!user) {
       throw new ForbiddenException('Invalid email or password.');
