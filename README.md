@@ -69,3 +69,11 @@ https://www.npmjs.com/package/argon2
 ```sh
 npm i argon2 --save
 ```
+
+## NestJS Configuration
+
+https://docs.nestjs.com/techniques/configuration
+
+```sh
+npm i --save @nestjs/config
+```
