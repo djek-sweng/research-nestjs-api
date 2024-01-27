@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: pasSworD
     ports:
       - 5432:5432
+    networks:
+      - nestjs
 
   adminer:
     image: adminer:4.8.1
@@ -17,3 +19,8 @@ services:
       - db
     ports:
       - 4200:8080
+    networks:
+      - nestjs
+
+networks:
+  nestjs:
