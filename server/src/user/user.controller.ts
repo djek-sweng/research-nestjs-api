@@ -10,4 +10,19 @@ export class UserController {
   getProfile(@ReqUser() user: User) {
     return user;
   }
+
+  @Get('email')
+  getEmail(@ReqUser('email') email: string) {
+    return { email };
+  }
+
+  @Get('name')
+  getName(@ReqUser('name') name: string) {
+    return { name };
+  }
+
+  @Get('status')
+  getStatus(@ReqUser('status') status: string | null) {
+    return { status };
+  }
 }
