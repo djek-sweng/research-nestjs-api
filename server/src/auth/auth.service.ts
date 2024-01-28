@@ -26,7 +26,7 @@ export class AuthService {
       data: { email: email, passwordHash: passwordHash, name: dto.name },
     });
 
-    return await this.jwt.signTokenAsync(user.id, user.email);
+    return await this.jwt.signTokenAsync(user);
   }
 
   async signin(dto: SigninDto): Promise<TokenDto> {
@@ -44,6 +44,6 @@ export class AuthService {
       throw new ForbiddenException('Invalid email or password.');
     }
 
-    return await this.jwt.signTokenAsync(user.id, user.email);
+    return await this.jwt.signTokenAsync(user);
   }
 }

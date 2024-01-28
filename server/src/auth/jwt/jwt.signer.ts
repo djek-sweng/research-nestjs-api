@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { TokenDto } from '../dto';
+import { JwtPayload, JwtUser } from './jwt.models';
 
 @Injectable()
 export class JwtSigner {
@@ -10,10 +11,10 @@ export class JwtSigner {
     private config: ConfigService,
   ) {}
 
-  async signTokenAsync(userId: number, email: string): Promise<TokenDto> {
-    const payload = {
-      sub: userId,
-      email: email,
+  async signTokenAsync(user: JwtUser): Promise<TokenDto> {
+    const payload: JwtPayload = {
+      sub: user.id,
+      email: user.email,
     };
 
     const expiresIn = parseInt(this.config.get('JWT_EXPIRES_IN'));
@@ -28,7 +29,7 @@ export class JwtSigner {
     return {
       access_token: token,
       expires_in: expiresIn,
-      user_id: userId,
+      user_id: user.id,
     };
   }
 }
