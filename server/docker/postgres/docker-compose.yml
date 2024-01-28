@@ -4,35 +4,27 @@ services:
   db-dev:
     image: postgres:16.1
     restart: always
+    depends_on:
+      - adminer
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pasSworD
     ports:
       - 5432:5432
-    networks:
-      - net-dev
 
   db-test:
     image: postgres:16.1
     restart: always
+    depends_on:
+      - adminer
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pasSworD
     ports:
       - 5433:5432
-    networks:
-      - net-test
 
   adminer:
     image: adminer:4.8.1
     restart: always
-    depends_on:
-      - db-dev
     ports:
       - 4200:8080
-    networks:
-      - net-dev
-
-networks:
-  net-dev:
-  net-test:
