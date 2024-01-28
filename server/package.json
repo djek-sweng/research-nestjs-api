@@ -5,11 +5,13 @@
   "author": "djek-sweng",
   "license": "ISC",
   "scripts": {
-    "prisma:studio": "prisma studio",
-    "prisma:dev:deploy": "prisma migrate deploy",
-    "prisma:test:deploy": "npm run prisma:dev:deploy",
-    "db:dev:up": "cd ./docker/postgres; docker compose up db-dev adminer -d",
-    "db:dev:down": "cd ./docker/postgres; docker compose down db-dev adminer",
+    "prisma:dev:studio": "dotenv -e .env -- prisma studio",
+    "prisma:test:studio": "dotenv -e .env.test -- prisma studio",
+    "prisma:dev:deploy": "dotenv -e .env -- prisma migrate deploy",
+    "prisma:test:deploy": "dotenv -e .env.test -- prisma migrate deploy",
+    "docker:down": "cd ./docker/postgres; docker compose down",
+    "db:dev:up": "cd ./docker/postgres; docker compose up db-dev -d",
+    "db:dev:down": "cd ./docker/postgres; docker compose down db-dev",
     "db:dev:restart": "npm run db:dev:down && npm run db:dev:up && sleep 1 && npm run prisma:dev:deploy",
     "db:test:up": "cd ./docker/postgres; docker compose up db-test -d",
     "db:test:down": "cd ./docker/postgres; docker compose down db-test",
@@ -25,8 +27,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "test:e2e:watch": "jest --watch --no-cache --config ./test/jest-e2e.json"
+    "test:e2e": "npm run db:test:restart && dotenv -e .env.test -- jest --watch --no-cache --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.1",
@@ -39,6 +40,7 @@
     "argon2": "^0.31.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dotenv-cli": "^7.3.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.14",
