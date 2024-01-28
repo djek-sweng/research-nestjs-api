@@ -1,9 +1,9 @@
+import { hash, verify } from 'argon2';
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import { DbService } from 'src/db/db.service';
 import { SigninDto, SignupDto, TokenDto } from './dto';
-import { hash, verify } from 'argon2';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -58,7 +58,7 @@ export class AuthService {
       email: email,
     };
 
-    const expiresIn = this.config.get('JWT_EXPIRES_IN');
+    const expiresIn = parseInt(this.config.get('JWT_EXPIRES_IN'));
 
     const options = {
       expiresIn: expiresIn,
@@ -69,7 +69,7 @@ export class AuthService {
 
     return {
       access_token: token,
-      expires_in: +expiresIn,
+      expires_in: expiresIn,
       user_id: userId,
     };
   }
