@@ -108,3 +108,16 @@ npm i @types/passport-jwt --save-dev
 ## NestJS Custom Decorators
 
 https://docs.nestjs.com/custom-decorators
+
+## PactumJS (REST API Testing Tool)
+
+https://pactumjs.github.io/
+
+```sh
+# install pactum as a dev dependency
+npm i pactum --save-dev
+
+# install a test runner to run pactum tests
+# mocha / jest / cucumber
+npm i mocha --save-dev
+```
