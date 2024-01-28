@@ -4,8 +4,3 @@ export interface JwtPayload {
   iat?: number;
   exp?: number;
 }
-
-export interface JwtUser {
-  id: number;
-  email: string;
-}

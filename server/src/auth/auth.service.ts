@@ -2,7 +2,7 @@ import { hash, verify } from 'argon2';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { DbService } from './../db/db.service';
 import { SigninDto, SignupDto, TokenDto } from './dto';
-import { JwtSigner } from './jwt';
+import { JwtSigner } from './provider';
 
 @Injectable()
 export class AuthService {

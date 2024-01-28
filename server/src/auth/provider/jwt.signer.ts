@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { TokenDto } from '../dto';
-import { JwtPayload, JwtUser } from './jwt.models';
+import { TokenDto } from './../dto';
+import { JwtPayload, JwtUser } from './../model';
 
 @Injectable()
 export class JwtSigner {
