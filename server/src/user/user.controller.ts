@@ -6,7 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt';
 export class UserController {
   @Get('me')
   getMe() {
-    return { message: 'Hello world.' };
+    return { message: 'Hello. It is me.' };
   }
 
   @Get('profile')
