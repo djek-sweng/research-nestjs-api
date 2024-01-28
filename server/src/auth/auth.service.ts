@@ -1,16 +1,14 @@
 import { hash, verify } from 'argon2';
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
-import { DbService } from 'src/db/db.service';
+import { DbService } from './../db/db.service';
 import { SigninDto, SignupDto, TokenDto } from './dto';
+import { JwtSigner } from './jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private db: DbService,
-    private jwt: JwtService,
-    private config: ConfigService,
+    private jwt: JwtSigner,
   ) {}
 
   async signup(dto: SignupDto): Promise<TokenDto> {
@@ -28,7 +26,7 @@ export class AuthService {
       data: { email: email, passwordHash: passwordHash, name: dto.name },
     });
 
-    return await this.signTokenAsync(user.id, user.email);
+    return await this.jwt.signTokenAsync(user.id, user.email);
   }
 
   async signin(dto: SigninDto): Promise<TokenDto> {
@@ -46,31 +44,6 @@ export class AuthService {
       throw new ForbiddenException('Invalid email or password.');
     }
 
-    return await this.signTokenAsync(user.id, user.email);
-  }
-
-  private async signTokenAsync(
-    userId: number,
-    email: string,
-  ): Promise<TokenDto> {
-    const payload = {
-      sub: userId,
-      email: email,
-    };
-
-    const expiresIn = parseInt(this.config.get('JWT_EXPIRES_IN'));
-
-    const options = {
-      expiresIn: expiresIn,
-      secret: this.config.get('JWT_SECRET'),
-    };
-
-    const token = await this.jwt.signAsync(payload, options);
-
-    return {
-      access_token: token,
-      expires_in: expiresIn,
-      user_id: userId,
-    };
+    return await this.jwt.signTokenAsync(user.id, user.email);
   }
 }
