@@ -19,6 +19,9 @@ nest g module auth
 
 # generate auth service
 nest g service auth --no-spec
+
+# generate auth controller
+nest g controller auth --no-spec
 ```
 
 ## Run Postgres inside Docker
@@ -84,4 +87,20 @@ https://docs.nestjs.com/security/authentication
 
 ```sh
 npm i @nestjs/jwt --save
+```
+
+### Passport (authentication middleware)
+
+https://www.passportjs.org
+
+https://www.passportjs.org/packages/passport-jwt/
+
+### NestJS Recipe Passport (authentication)
+
+https://docs.nestjs.com/recipes/passport
+
+```sh
+npm i @nestjs/passport passport --save
+npm i @nestjs/jwt passport-jwt --save
+npm i @types/passport-jwt --save-dev
 ```
