@@ -27,9 +27,11 @@ nest g controller auth --no-spec
 ## Run Postgres inside Docker
 
 ```sh
-cd ./tools/docker/postgres
+cd ./server
 
-docker compose up --remove-orphans -d
+npm i
+
+npm run db:dev:restart
 ```
 
 ## Prisma ORM

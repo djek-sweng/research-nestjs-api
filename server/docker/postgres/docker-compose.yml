@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  db:
+  db-dev:
     image: postgres:16.1
     restart: always
     environment:
@@ -10,17 +10,29 @@ services:
     ports:
       - 5432:5432
     networks:
-      - nestjs
+      - net-dev
+
+  db-test:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pasSworD
+    ports:
+      - 5433:5432
+    networks:
+      - net-test
 
   adminer:
     image: adminer:4.8.1
     restart: always
     depends_on:
-      - db
+      - db-dev
     ports:
       - 4200:8080
     networks:
-      - nestjs
+      - net-dev
 
 networks:
-  nestjs:
+  net-dev:
+  net-test:
