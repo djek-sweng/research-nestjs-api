@@ -1,17 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { DbService } from './../db/db.service';
+import { CreateNoteDto, UpdateNoteDto } from './dto';
 
 @Injectable()
 export class NoteService {
   constructor(private db: DbService) {}
 
-  createNote() {}
+  createNote(userId: number, dto: CreateNoteDto) {}
 
-  getNote() {}
+  getNote(userId: number, noteId: number) {}
 
-  getNotes() {}
+  getNotes(userId: number) {}
 
-  updateNote() {}
+  updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {}
 
-  deleteNote() {}
+  deleteNote(userId: number, noteId: number) {}
 }
