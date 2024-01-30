@@ -15,7 +15,7 @@ export class NoteService {
   }
 
   getNotes(userId: number) {
-    return null;
+    return this.db.note.findMany({ where: { userId: userId } });
   }
 
   updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {
