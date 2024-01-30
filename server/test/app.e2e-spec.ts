@@ -1,16 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  HttpCode,
-  HttpStatus,
-  INestApplication,
-  ValidationPipe,
-} from '@nestjs/common';
+import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import * as pactum from 'pactum';
+import { DbManager } from './db';
 import { AppModule } from './../src/app.module';
 import { DbService } from './../src/db/db.service';
-import { DbManager } from './db';
-import { SignupDto } from 'src/auth/dto';
-import { inspect } from 'util';
+import { SignupDto } from './../src/auth/dto';
 
 describe('Application (e2e)', () => {
   let app: INestApplication;
@@ -37,27 +31,78 @@ describe('Application (e2e)', () => {
   });
 
   describe('Auth', () => {
+    const signupDto: SignupDto = {
+      name: 'test',
+      email: 'test@test.com',
+      password: 'pasSworD',
+    };
+
     describe('Signup', () => {
       it('Should signup', () => {
-        const body: SignupDto = {
-          name: 'test',
-          email: 'test@test.com',
-          password: 'pasSworD',
-        };
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(signupDto)
+          .expectStatus(HttpStatus.CREATED)
+          .expectBodyContains('access_token')
+          .expectBodyContains('expires_in')
+          .expectBodyContains('user_id');
+        //.inspect();
+      });
+
+      it('Should throw if email is empty', () => {
+        const body = { ...signupDto };
+        body.email = '';
+
         return pactum
           .spec()
           .post('/auth/signup')
           .withBody(body)
-          .expectStatus(HttpStatus.CREATED)
-          .expectBodyContains('access_token')
-          .expectBodyContains('expires_in')
-          .expectBodyContains('user_id')
-          .inspect();
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('email should not be empty')
+          .expectBodyContains('email must be an email');
+        //.inspect();
+      });
+
+      it('Should throw if email is invalid', () => {
+        const body = { ...signupDto };
+        body.email = 'invalid-email';
+
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('email must be an email');
+        //.inspect();
+      });
+
+      it('Should throw if name is empty', () => {
+        const body = { ...signupDto };
+        body.name = '';
+
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('name should not be empty');
+        //.inspect();
       });
     });
 
     describe('Signin', () => {
-      it.todo('Should signin');
+      it('Should signin', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody(signupDto)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('access_token')
+          .expectBodyContains('expires_in')
+          .expectBodyContains('user_id');
+        //.inspect();
+      });
     });
   });
 
