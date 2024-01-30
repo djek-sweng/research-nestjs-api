@@ -6,13 +6,23 @@ import { CreateNoteDto, UpdateNoteDto } from './dto';
 export class NoteService {
   constructor(private db: DbService) {}
 
-  createNote(userId: number, dto: CreateNoteDto) {}
+  createNote(userId: number, dto: CreateNoteDto) {
+    return null;
+  }
 
-  getNote(userId: number, noteId: number) {}
+  getNote(userId: number, noteId: number) {
+    return null;
+  }
 
-  getNotes(userId: number) {}
+  getNotes(userId: number) {
+    return null;
+  }
 
-  updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {}
+  updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {
+    return null;
+  }
 
-  deleteNote(userId: number, noteId: number) {}
+  deleteNote(userId: number, noteId: number) {
+    return null;
+  }
 }

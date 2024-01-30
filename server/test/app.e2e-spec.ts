@@ -9,6 +9,7 @@ import { UpdateUserDto } from 'src/user/dto';
 
 describe('Application (e2e)', () => {
   let app: INestApplication;
+  let headers: { Authorization: string };
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -162,7 +163,7 @@ describe('Application (e2e)', () => {
   });
 
   describe('User', () => {
-    const headers = { Authorization: 'Bearer $S{jwt}' };
+    headers = { Authorization: 'Bearer $S{jwt}' };
 
     describe('Get profile', () => {
       it('should get profile', () => {
@@ -307,10 +308,27 @@ describe('Application (e2e)', () => {
   });
 
   describe('Note', () => {
+    const headersss = { Authorization: 'Bearer $S{jwt}' };
+
+    describe('Get empty notes', () => {
+      it('should get notes', () => {
+        return pactum
+          .spec()
+          .get('/notes')
+          .withHeaders(headersss)
+          .expectStatus(HttpStatus.OK)
+          .inspect();
+      });
+    });
+
     describe('Create note', () => {});
+
     describe('Get notes', () => {});
+
     describe('Get note', () => {});
+
     describe('Update note', () => {});
+
     describe('Delete note', () => {});
   });
 });
