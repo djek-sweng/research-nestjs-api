@@ -5,6 +5,7 @@ import { DbManager } from './db';
 import { AppModule } from './../src/app.module';
 import { DbService } from './../src/db/db.service';
 import { SignupDto } from './../src/auth/dto';
+import { UpdateUserDto } from 'src/user/dto';
 
 describe('Application (e2e)', () => {
   let app: INestApplication;
@@ -179,14 +180,15 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw unauthorized', () => {
+      it('Should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/profile')
           .withHeaders({})
           .expectStatus(HttpStatus.UNAUTHORIZED)
           .expectBodyContains('message')
-          .expectBodyContains('statusCode');
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.UNAUTHORIZED);
         //.inspect();
       });
     });
@@ -202,14 +204,15 @@ describe('Application (e2e)', () => {
         //inspect();
       });
 
-      it('Should throw unauthorized', () => {
+      it('Should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/email')
           .withHeaders({})
           .expectStatus(HttpStatus.UNAUTHORIZED)
           .expectBodyContains('message')
-          .expectBodyContains('statusCode');
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.UNAUTHORIZED);
         //.inspect();
       });
     });
@@ -225,14 +228,15 @@ describe('Application (e2e)', () => {
         //inspect();
       });
 
-      it('Should throw unauthorized', () => {
+      it('Should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/name')
           .withHeaders({})
           .expectStatus(HttpStatus.UNAUTHORIZED)
           .expectBodyContains('message')
-          .expectBodyContains('statusCode');
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.UNAUTHORIZED);
         //.inspect();
       });
     });
@@ -248,22 +252,57 @@ describe('Application (e2e)', () => {
         //inspect();
       });
 
-      it('Should throw unauthorized', () => {
+      it('Should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/status')
           .withHeaders({})
           .expectStatus(HttpStatus.UNAUTHORIZED)
           .expectBodyContains('message')
-          .expectBodyContains('statusCode');
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.UNAUTHORIZED);
         //.inspect();
       });
     });
 
     describe('Update profile', () => {
-      it.todo('Should update profile');
+      const dto: UpdateUserDto = {
+        name: 'tset',
+        email: 'tset@tset.com',
+        status: 'sutats',
+      };
 
-      it.todo('Should throw unauthorized');
+      it('Should update profile', () => {
+        return pactum
+          .spec()
+          .put('/users')
+          .withHeaders(headers)
+          .withBody(dto)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('id')
+          .expectBodyContains('email')
+          .expectBodyContains('name')
+          .expectBodyContains('status')
+          .expectBodyContains('createdAt')
+          .expectBodyContains('updatedAt')
+          .expectBodyContains(dto.email)
+          .expectBodyContains(dto.name)
+          .expectBodyContains(dto.status);
+        //.inspect();
+      });
+
+      it('Should throw unauthorized (w/o headers)', () => {
+        return pactum
+          .spec()
+          .put('/users')
+          .withHeaders({})
+          .withBody(dto)
+          .expectStatus(HttpStatus.UNAUTHORIZED)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.UNAUTHORIZED);
+        //.inspect();
+      });
     });
   });
 

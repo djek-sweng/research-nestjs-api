@@ -1,11 +1,15 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { JwtAuthGuard } from './../auth/guard';
 import { ReqUser } from './../auth/decorator';
+import { UpdateUserDto } from './dto';
+import { UserService } from './user.service';
 
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
+  constructor(private userService: UserService) {}
+
   @Get('profile')
   getProfile(@ReqUser() user: User) {
     return user;
@@ -24,5 +28,10 @@ export class UserController {
   @Get('status')
   getStatus(@ReqUser('status') status: string | null) {
     return { status };
+  }
+
+  @Put()
+  updateUser(@ReqUser('id') userId: number, @Body() dto: UpdateUserDto) {
+    return this.userService.updateUser(userId, dto);
   }
 }
