@@ -66,7 +66,7 @@ describe('Application (e2e)', () => {
 
       it('Should throw if email is invalid', () => {
         const body = { ...signupDto };
-        body.email = 'invalid-email';
+        body.email = '123';
 
         return pactum
           .spec()
@@ -74,6 +74,19 @@ describe('Application (e2e)', () => {
           .withBody(body)
           .expectStatus(HttpStatus.BAD_REQUEST)
           .expectBodyContains('email must be an email');
+        //.inspect();
+      });
+
+      it('Should throw if password is empty', () => {
+        const body = { ...signupDto };
+        body.password = '';
+
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('password should not be empty');
         //.inspect();
       });
 
@@ -101,6 +114,46 @@ describe('Application (e2e)', () => {
           .expectBodyContains('access_token')
           .expectBodyContains('expires_in')
           .expectBodyContains('user_id');
+        //.inspect();
+      });
+
+      it('Should throw if email is empty', () => {
+        const body = { ...signupDto };
+        body.email = '';
+
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('email should not be empty')
+          .expectBodyContains('email must be an email');
+        //.inspect();
+      });
+
+      it('Should throw if email is invalid', () => {
+        const body = { ...signupDto };
+        body.email = '123';
+
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('email must be an email');
+        //.inspect();
+      });
+
+      it('Should throw if password is empty', () => {
+        const body = { ...signupDto };
+        body.password = '';
+
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('password should not be empty');
         //.inspect();
       });
     });
