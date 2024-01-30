@@ -308,14 +308,12 @@ describe('Application (e2e)', () => {
   });
 
   describe('Note', () => {
-    const headersss = { Authorization: 'Bearer $S{jwt}' };
-
     describe('Get empty notes', () => {
       it('should get notes (empty array)', () => {
         return pactum
           .spec()
           .get('/notes')
-          .withHeaders(headersss)
+          .withHeaders(headers)
           .expectStatus(HttpStatus.OK)
           .expectBody([]);
         //.inspect();
