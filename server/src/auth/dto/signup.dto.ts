@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { SigninDto } from '.';
+import { SigninDto } from './signin.dto';
 
 export class SignupDto extends SigninDto {
   @IsString()
