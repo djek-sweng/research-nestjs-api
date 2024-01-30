@@ -39,7 +39,7 @@ describe('Application (e2e)', () => {
     };
 
     describe('Signup', () => {
-      it('Should signup', () => {
+      it('should signup', () => {
         return pactum
           .spec()
           .post('/auth/signup')
@@ -51,7 +51,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if email is empty', () => {
+      it('should throw if email is empty', () => {
         const body = { ...signupDto };
         body.email = '';
 
@@ -65,7 +65,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if email is invalid', () => {
+      it('should throw if email is invalid', () => {
         const body = { ...signupDto };
         body.email = '123';
 
@@ -78,7 +78,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if password is empty', () => {
+      it('should throw if password is empty', () => {
         const body = { ...signupDto };
         body.password = '';
 
@@ -91,7 +91,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if name is empty', () => {
+      it('should throw if name is empty', () => {
         const body = { ...signupDto };
         body.name = '';
 
@@ -106,7 +106,7 @@ describe('Application (e2e)', () => {
     });
 
     describe('Signin', () => {
-      it('Should signin', () => {
+      it('should signin', () => {
         return pactum
           .spec()
           .post('/auth/signin')
@@ -119,7 +119,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if email is empty', () => {
+      it('should throw if email is empty', () => {
         const body = { ...signupDto };
         body.email = '';
 
@@ -133,7 +133,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if email is invalid', () => {
+      it('should throw if email is invalid', () => {
         const body = { ...signupDto };
         body.email = '123';
 
@@ -146,7 +146,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw if password is empty', () => {
+      it('should throw if password is empty', () => {
         const body = { ...signupDto };
         body.password = '';
 
@@ -165,7 +165,7 @@ describe('Application (e2e)', () => {
     const headers = { Authorization: 'Bearer $S{jwt}' };
 
     describe('Get profile', () => {
-      it('Should get profile', () => {
+      it('should get profile', () => {
         return pactum
           .spec()
           .get('/users/profile')
@@ -180,7 +180,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw unauthorized (w/o headers)', () => {
+      it('should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/profile')
@@ -194,7 +194,7 @@ describe('Application (e2e)', () => {
     });
 
     describe('Get email', () => {
-      it('Should get email', () => {
+      it('should get email', () => {
         return pactum
           .spec()
           .get('/users/email')
@@ -204,7 +204,7 @@ describe('Application (e2e)', () => {
         //inspect();
       });
 
-      it('Should throw unauthorized (w/o headers)', () => {
+      it('should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/email')
@@ -218,7 +218,7 @@ describe('Application (e2e)', () => {
     });
 
     describe('Get name', () => {
-      it('Should get name', () => {
+      it('should get name', () => {
         return pactum
           .spec()
           .get('/users/name')
@@ -228,7 +228,7 @@ describe('Application (e2e)', () => {
         //inspect();
       });
 
-      it('Should throw unauthorized (w/o headers)', () => {
+      it('should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/name')
@@ -242,7 +242,7 @@ describe('Application (e2e)', () => {
     });
 
     describe('Get status', () => {
-      it('Should get status', () => {
+      it('should get status', () => {
         return pactum
           .spec()
           .get('/users/status')
@@ -252,7 +252,7 @@ describe('Application (e2e)', () => {
         //inspect();
       });
 
-      it('Should throw unauthorized (w/o headers)', () => {
+      it('should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .get('/users/status')
@@ -272,7 +272,7 @@ describe('Application (e2e)', () => {
         status: 'sutats',
       };
 
-      it('Should update profile', () => {
+      it('should update profile', () => {
         return pactum
           .spec()
           .put('/users')
@@ -291,7 +291,7 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
-      it('Should throw unauthorized (w/o headers)', () => {
+      it('should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
           .put('/users')
