@@ -10,11 +10,11 @@ describe('Application (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = module.createNestApplication();
 
     app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
@@ -270,7 +270,7 @@ describe('Application (e2e)', () => {
   describe('Note', () => {
     describe('Create note', () => {});
     describe('Get notes', () => {});
-    describe('Get note by id', () => {});
+    describe('Get note', () => {});
     describe('Update note', () => {});
     describe('Delete note', () => {});
   });
