@@ -113,7 +113,8 @@ describe('Application (e2e)', () => {
           .expectStatus(HttpStatus.OK)
           .expectBodyContains('access_token')
           .expectBodyContains('expires_in')
-          .expectBodyContains('user_id');
+          .expectBodyContains('user_id')
+          .stores('jwt', 'access_token');
         //.inspect();
       });
 
@@ -160,11 +161,110 @@ describe('Application (e2e)', () => {
   });
 
   describe('User', () => {
-    describe('Get profile', () => {});
-    describe('Get email', () => {});
-    describe('Get name', () => {});
-    describe('Get status', () => {});
-    describe('Update profile', () => {});
+    const headers = { Authorization: 'Bearer $S{jwt}' };
+
+    describe('Get profile', () => {
+      it('Should get profile', () => {
+        return pactum
+          .spec()
+          .get('/users/profile')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('id')
+          .expectBodyContains('email')
+          .expectBodyContains('name')
+          .expectBodyContains('status')
+          .expectBodyContains('createdAt')
+          .expectBodyContains('updatedAt');
+        //.inspect();
+      });
+
+      it('Should throw unauthorized', () => {
+        return pactum
+          .spec()
+          .get('/users/profile')
+          .withHeaders({})
+          .expectStatus(HttpStatus.UNAUTHORIZED)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode');
+        //.inspect();
+      });
+    });
+
+    describe('Get email', () => {
+      it('Should get email', () => {
+        return pactum
+          .spec()
+          .get('/users/email')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('email');
+        //inspect();
+      });
+
+      it('Should throw unauthorized', () => {
+        return pactum
+          .spec()
+          .get('/users/email')
+          .withHeaders({})
+          .expectStatus(HttpStatus.UNAUTHORIZED)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode');
+        //.inspect();
+      });
+    });
+
+    describe('Get name', () => {
+      it('Should get name', () => {
+        return pactum
+          .spec()
+          .get('/users/name')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('name');
+        //inspect();
+      });
+
+      it('Should throw unauthorized', () => {
+        return pactum
+          .spec()
+          .get('/users/name')
+          .withHeaders({})
+          .expectStatus(HttpStatus.UNAUTHORIZED)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode');
+        //.inspect();
+      });
+    });
+
+    describe('Get status', () => {
+      it('Should get status', () => {
+        return pactum
+          .spec()
+          .get('/users/status')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('status');
+        //inspect();
+      });
+
+      it('Should throw unauthorized', () => {
+        return pactum
+          .spec()
+          .get('/users/status')
+          .withHeaders({})
+          .expectStatus(HttpStatus.UNAUTHORIZED)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode');
+        //.inspect();
+      });
+    });
+
+    describe('Update profile', () => {
+      it.todo('Should update profile');
+
+      it.todo('Should throw unauthorized');
+    });
   });
 
   describe('Note', () => {
