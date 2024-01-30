@@ -1,17 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 
-const tableNames = ['Notes', 'Users'];
-
 export default async () => {
   const prisma = new PrismaClient();
 
+  await prisma.$connect();
+
   try {
-    for (const tableName of tableNames) {
-      await prisma.$executeRaw`DELETE FROM "${tableName}";`;
-    }
+    await prisma.note.deleteMany();
+    await prisma.user.deleteMany();
   } catch (err) {
     console.error(err);
-  } finally {
-    await prisma.$disconnect();
   }
+
+  await prisma.$disconnect();
 };
