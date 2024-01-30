@@ -1,16 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import {
+  HttpCode,
+  HttpStatus,
+  INestApplication,
+  ValidationPipe,
+} from '@nestjs/common';
+import * as pactum from 'pactum';
 import { AppModule } from './../src/app.module';
-import cleaner from './db.cleaner';
+import { DbService } from './../src/db/db.service';
+import { DbManager } from './db';
+import { SignupDto } from 'src/auth/dto';
+import { inspect } from 'util';
 
 describe('Application (e2e)', () => {
-  // it('/ (GET)', () => {
-  //   return request(app.getHttpServer())
-  //     .get('/')
-  //     .expect(200)
-  //     .expect('Hello World!');
-  // });
-
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -23,8 +25,11 @@ describe('Application (e2e)', () => {
     app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
     await app.init();
+    await app.listen(5001);
 
-    await cleaner();
+    pactum.request.setBaseUrl(await app.getUrl());
+
+    await new DbManager(app.get(DbService)).deleteAll();
   });
 
   afterAll(async () => {
@@ -33,8 +38,24 @@ describe('Application (e2e)', () => {
 
   describe('Auth', () => {
     describe('Signup', () => {
-      it.todo('Should signup');
+      it('Should signup', () => {
+        const body: SignupDto = {
+          name: 'test',
+          email: 'test@test.com',
+          password: 'pasSworD',
+        };
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(body)
+          .expectStatus(HttpStatus.CREATED)
+          .expectBodyContains('access_token')
+          .expectBodyContains('expires_in')
+          .expectBodyContains('user_id')
+          .inspect();
+      });
     });
+
     describe('Signin', () => {
       it.todo('Should signin');
     });
