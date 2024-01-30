@@ -18,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.db.findUserByEmail(payload.email);
+    const user = await this.db.findUserById(payload.sub);
 
     delete user.passwordHash;
 
