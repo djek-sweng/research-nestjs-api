@@ -427,8 +427,56 @@ describe('Application (e2e)', () => {
           .expectBodyContains(updateNoteDto.tag);
         //.inspect();
       });
+
+      it('should throw if note is not found', () => {
+        return pactum
+          .spec()
+          .put('/notes/0')
+          .withHeaders(headers)
+          .withBody(updateNoteDto)
+          .expectStatus(HttpStatus.NOT_FOUND)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.NOT_FOUND);
+        //.inspect();
+      });
     });
 
-    describe('Delete note', () => {});
+    describe('Delete note', () => {
+      it('should delete note by id', () => {
+        return pactum
+          .spec()
+          .delete('/notes/{id}')
+          .withPathParams('id', '$S{noteId}')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.NO_CONTENT)
+          .expectBody(null);
+        //.inspect();
+      });
+
+      it('should throw if note is not found', () => {
+        return pactum
+          .spec()
+          .delete('/notes/0')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.NOT_FOUND)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.NOT_FOUND);
+        //.inspect();
+      });
+    });
+
+    describe('Get empty notes', () => {
+      it('should get notes (empty array)', () => {
+        return pactum
+          .spec()
+          .get('/notes')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectBody([]);
+        //.inspect();
+      });
+    });
   });
 });

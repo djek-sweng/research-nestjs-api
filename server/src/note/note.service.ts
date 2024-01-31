@@ -10,8 +10,8 @@ import { CreateNoteDto, UpdateNoteDto } from './dto';
 export class NoteService {
   constructor(private db: DbService) {}
 
-  async createNote(userId: number, dto: CreateNoteDto) {
-    return await this.db.note.create({ data: { ...dto, userId } });
+  createNote(userId: number, dto: CreateNoteDto) {
+    return this.db.note.create({ data: { ...dto, userId } });
   }
 
   async getNote(userId: number, noteId: number) {
@@ -37,13 +37,17 @@ export class NoteService {
   async updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {
     const note = await this.getNote(userId, noteId);
 
-    return await this.db.note.update({
+    return this.db.note.update({
       where: { id: note.id },
       data: { ...dto },
     });
   }
 
-  deleteNote(userId: number, noteId: number) {
-    return null;
+  async deleteNote(userId: number, noteId: number) {
+    const note = await this.getNote(userId, noteId);
+
+    this.db.note.delete({ where: { id: note.id } });
+
+    return;
   }
 }
