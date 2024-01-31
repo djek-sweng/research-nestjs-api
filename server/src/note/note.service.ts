@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DbService } from './../db/db.service';
 import { CreateNoteDto, UpdateNoteDto } from './dto';
 
@@ -11,12 +15,16 @@ export class NoteService {
   }
 
   async getNote(userId: number, noteId: number) {
-    const note = await this.db.note.findFirst({
-      where: { userId: userId, id: noteId },
+    const note = await this.db.note.findUnique({
+      where: { id: noteId },
     });
 
     if (!note) {
       throw new NotFoundException();
+    }
+
+    if (note.userId !== userId) {
+      throw new ForbiddenException();
     }
 
     return note;
