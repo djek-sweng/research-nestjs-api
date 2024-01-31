@@ -23,6 +23,17 @@ services:
     ports:
       - 5433:5432
 
+  db-prod:
+    image: postgres:16.1
+    restart: always
+    depends_on:
+      - adminer
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pasSworD
+    ports:
+      - 5434:5432
+
   adminer:
     image: adminer:4.8.1
     restart: always
