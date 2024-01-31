@@ -355,7 +355,8 @@ describe('Application (e2e)', () => {
           .expectBodyContains('tag')
           .expectBodyContains(createNoteDto.title)
           .expectBodyContains(createNoteDto.content)
-          .expectBodyContains(createNoteDto.tag);
+          .expectBodyContains(createNoteDto.tag)
+          .stores('noteId', 'id');
         //.inspect();
       });
     });
@@ -375,7 +376,32 @@ describe('Application (e2e)', () => {
       });
     });
 
-    describe('Get note', () => {});
+    describe('Get note', () => {
+      it('should get note by id', () => {
+        return pactum
+          .spec()
+          .get('/notes/{id}')
+          .withPathParams('id', '$S{noteId}')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains(createNoteDto.title)
+          .expectBodyContains(createNoteDto.content)
+          .expectBodyContains(createNoteDto.tag);
+        //.inspect();
+      });
+
+      it('should throw if note is not found', () => {
+        return pactum
+          .spec()
+          .get('/notes/0')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.NOT_FOUND)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.NOT_FOUND)
+          .inspect();
+      });
+    });
 
     describe('Update note', () => {});
 

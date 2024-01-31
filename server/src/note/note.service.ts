@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DbService } from './../db/db.service';
 import { CreateNoteDto, UpdateNoteDto } from './dto';
 
@@ -10,8 +10,16 @@ export class NoteService {
     return await this.db.note.create({ data: { ...dto, userId } });
   }
 
-  getNote(userId: number, noteId: number) {
-    return null;
+  async getNote(userId: number, noteId: number) {
+    const note = await this.db.note.findFirst({
+      where: { userId: userId, id: noteId },
+    });
+
+    if (!note) {
+      throw new NotFoundException();
+    }
+
+    return note;
   }
 
   getNotes(userId: number) {
