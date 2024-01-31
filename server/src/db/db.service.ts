@@ -14,11 +14,11 @@ export class DbService extends PrismaClient {
     });
   }
 
-  findUserById(id: number): Promise<User> {
+  findUserById(id: number) {
     return this.user.findUnique({ where: { id: id } });
   }
 
-  findUserByEmail(email: string): Promise<User> {
+  findUserByEmail(email: string) {
     return this.user.findUnique({ where: { email: email } });
   }
 }
