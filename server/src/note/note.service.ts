@@ -34,8 +34,13 @@ export class NoteService {
     return this.db.note.findMany({ where: { userId: userId } });
   }
 
-  updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {
-    return null;
+  async updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {
+    const note = await this.getNote(userId, noteId);
+
+    return await this.db.note.update({
+      where: { id: note.id },
+      data: { ...dto },
+    });
   }
 
   deleteNote(userId: number, noteId: number) {

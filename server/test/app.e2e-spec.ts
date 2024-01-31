@@ -6,7 +6,7 @@ import { AppModule } from './../src/app.module';
 import { DbService } from './../src/db/db.service';
 import { SignupDto } from './../src/auth/dto';
 import { UpdateUserDto } from './../src/user/dto';
-import { CreateNoteDto } from './../src/note/dto';
+import { CreateNoteDto, UpdateNoteDto } from './../src/note/dto';
 
 describe('Application (e2e)', () => {
   let app: INestApplication;
@@ -337,12 +337,12 @@ describe('Application (e2e)', () => {
 
     describe('Create note', () => {
       createNoteDto = {
-        title: 'my test note',
-        content: 'my test content',
-        tag: 'my test tag',
+        title: 'test title',
+        content: 'test content',
+        tag: 'test tag',
       };
 
-      it('should create one note', () => {
+      it('should create note', () => {
         return pactum
           .spec()
           .post('/notes')
@@ -398,12 +398,36 @@ describe('Application (e2e)', () => {
           .expectStatus(HttpStatus.NOT_FOUND)
           .expectBodyContains('message')
           .expectBodyContains('statusCode')
-          .expectBodyContains(HttpStatus.NOT_FOUND)
-          .inspect();
+          .expectBodyContains(HttpStatus.NOT_FOUND);
+        //.inspect();
       });
     });
 
-    describe('Update note', () => {});
+    describe('Update note', () => {
+      const updateNoteDto: UpdateNoteDto = {
+        title: 'updated test title',
+        content: 'updated test content',
+        tag: 'updated test content',
+      };
+
+      it('should update note by id', () => {
+        return pactum
+          .spec()
+          .put('/notes/{id}')
+          .withPathParams('id', '$S{noteId}')
+          .withHeaders(headers)
+          .withBody(updateNoteDto)
+          .expectStatus(HttpStatus.OK)
+          .expectBodyContains('id')
+          .expectBodyContains('title')
+          .expectBodyContains('content')
+          .expectBodyContains('tag')
+          .expectBodyContains(updateNoteDto.title)
+          .expectBodyContains(updateNoteDto.content)
+          .expectBodyContains(updateNoteDto.tag);
+        //.inspect();
+      });
+    });
 
     describe('Delete note', () => {});
   });
