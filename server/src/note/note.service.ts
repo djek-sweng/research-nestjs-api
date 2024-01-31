@@ -6,8 +6,8 @@ import { CreateNoteDto, UpdateNoteDto } from './dto';
 export class NoteService {
   constructor(private db: DbService) {}
 
-  createNote(userId: number, dto: CreateNoteDto) {
-    return null;
+  async createNote(userId: number, dto: CreateNoteDto) {
+    return await this.db.note.create({ data: { ...dto, userId } });
   }
 
   getNote(userId: number, noteId: number) {

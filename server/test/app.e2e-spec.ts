@@ -5,7 +5,8 @@ import { DbManager } from './db';
 import { AppModule } from './../src/app.module';
 import { DbService } from './../src/db/db.service';
 import { SignupDto } from './../src/auth/dto';
-import { UpdateUserDto } from 'src/user/dto';
+import { UpdateUserDto } from './../src/user/dto';
+import { CreateNoteDto } from './../src/note/dto';
 
 describe('Application (e2e)', () => {
   let app: INestApplication;
@@ -308,6 +309,8 @@ describe('Application (e2e)', () => {
   });
 
   describe('Note', () => {
+    let createNoteDto: CreateNoteDto;
+
     describe('Get empty notes', () => {
       it('should get notes (empty array)', () => {
         return pactum
@@ -318,11 +321,59 @@ describe('Application (e2e)', () => {
           .expectBody([]);
         //.inspect();
       });
+
+      it('should throw unauthorized (w/o headers)', () => {
+        return pactum
+          .spec()
+          .get('/notes')
+          .withHeaders({})
+          .expectStatus(HttpStatus.UNAUTHORIZED)
+          .expectBodyContains('message')
+          .expectBodyContains('statusCode')
+          .expectBodyContains(HttpStatus.UNAUTHORIZED);
+        //.inspect();
+      });
     });
 
-    describe('Create note', () => {});
+    describe('Create note', () => {
+      createNoteDto = {
+        title: 'my test note',
+        content: 'my test content',
+        tag: 'my test tag',
+      };
 
-    describe('Get notes', () => {});
+      it('should create one note', () => {
+        return pactum
+          .spec()
+          .post('/notes')
+          .withHeaders(headers)
+          .withBody(createNoteDto)
+          .expectStatus(HttpStatus.CREATED)
+          .expectBodyContains('id')
+          .expectBodyContains('title')
+          .expectBodyContains('content')
+          .expectBodyContains('tag')
+          .expectBodyContains(createNoteDto.title)
+          .expectBodyContains(createNoteDto.content)
+          .expectBodyContains(createNoteDto.tag);
+        //.inspect();
+      });
+    });
+
+    describe('Get notes', () => {
+      it('should get notes (array with one note)', () => {
+        return pactum
+          .spec()
+          .get('/notes')
+          .withHeaders(headers)
+          .expectStatus(HttpStatus.OK)
+          .expectJsonLength(1)
+          .expectBodyContains(createNoteDto.title)
+          .expectBodyContains(createNoteDto.content)
+          .expectBodyContains(createNoteDto.tag);
+        //.inspect();
+      });
+    });
 
     describe('Get note', () => {});
 
