@@ -123,3 +123,11 @@ npm install pactum --save-dev
 # mocha / jest / cucumber
 npm install mocha --save-dev
 ```
+
+## Protection from well-known Web Vulnerabilities
+
+https://docs.nestjs.com/security/helmet
+
+```sh
+npm install helmet --save
+```
