@@ -5,7 +5,7 @@ Research NestJS API
 ## Install NestJS CLI
 
 ```sh
-npm i -g @nestjs/cli
+npm install -g @nestjs/cli
 ```
 
 ## NestJS CLI Commands
@@ -29,7 +29,7 @@ nest g controller auth --no-spec
 ```sh
 cd ./server
 
-npm i
+npm install
 
 npm run db:dev:restart
 ```
@@ -42,8 +42,8 @@ https://www.prisma.io/
 cd ./server
 
 # install dependencies
-npm i prisma --save-dev
-npm i @prisma/client --save
+npm install prisma --save-dev
+npm install @prisma/client --save
 
 # verify installation
 npx prisma --version
@@ -64,7 +64,7 @@ npx prisma studio
 https://docs.nestjs.com/pipes#class-validator
 
 ```sh
-npm i class-validator class-transformer --save
+npm install class-validator class-transformer --save
 ```
 
 ## Hash and Verify
@@ -72,7 +72,7 @@ npm i class-validator class-transformer --save
 https://www.npmjs.com/package/argon2
 
 ```sh
-npm i argon2 --save
+npm install argon2 --save
 ```
 
 ## NestJS Configuration
@@ -80,7 +80,7 @@ npm i argon2 --save
 https://docs.nestjs.com/techniques/configuration
 
 ```sh
-npm i @nestjs/config --save
+npm install @nestjs/config --save
 ```
 
 ## Authentication with JWT Bearer
@@ -88,7 +88,7 @@ npm i @nestjs/config --save
 https://docs.nestjs.com/security/authentication
 
 ```sh
-npm i @nestjs/jwt --save
+npm install @nestjs/jwt --save
 ```
 
 ### Passport (authentication middleware)
@@ -102,9 +102,9 @@ https://www.passportjs.org/packages/passport-jwt/
 https://docs.nestjs.com/recipes/passport
 
 ```sh
-npm i @nestjs/passport passport --save
-npm i @nestjs/jwt passport-jwt --save
-npm i @types/passport-jwt --save-dev
+npm install @nestjs/passport passport --save
+npm install @nestjs/jwt passport-jwt --save
+npm install @types/passport-jwt --save-dev
 ```
 
 ## NestJS Custom Decorators
@@ -117,9 +117,9 @@ https://pactumjs.github.io/
 
 ```sh
 # install pactum as a dev dependency
-npm i pactum --save-dev
+npm install pactum --save-dev
 
 # install a test runner to run pactum tests
 # mocha / jest / cucumber
-npm i mocha --save-dev
+npm install mocha --save-dev
 ```
