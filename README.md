@@ -131,3 +131,11 @@ https://docs.nestjs.com/security/helmet
 ```sh
 npm install helmet --save
 ```
+
+## OpenAPI (Swagger)
+
+https://docs.nestjs.com/openapi/introduction
+
+```sh
+npm install @nestjs/swagger --save
+```

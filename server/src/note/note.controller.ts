@@ -11,11 +11,13 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { ReqUser } from './../auth/decorator';
 import { JwtAuthGuard } from './../auth/guard';
 import { NoteService } from './note.service';
 import { CreateNoteDto, UpdateNoteDto } from './dto';
 
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('notes')
 export class NoteController {
