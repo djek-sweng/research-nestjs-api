@@ -15,6 +15,7 @@ Backend (server):
 - Passport (Authentication Middleware)
 - argon2 (Password Hashing)
 - Helmet (Secure Header)
+- Custom Decorators
 - CORS Headers
 - Swagger (OpenAPI Interface)
 - dotenv
