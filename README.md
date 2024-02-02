@@ -26,7 +26,7 @@ Frontent (client):
 
 ## Start NestJS API
 
-Install modules, run linter, test and application:
+Install modules, run linter, tests and start application:
 
 ```sh
 cd ./src/server
