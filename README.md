@@ -6,6 +6,19 @@ In this repository I researched NestJS (Express) for API backend development.
 
 Backend (server):
 
+- NestJS with Express (Web Framework)
+- Restful API
+- PostreSQL (Database)
+- Prisma (ORM)
+- Input Validation
+- Authorization Bearer (JWT)
+- Passport (Authentication Middleware)
+- argon2 (Password Hashing)
+- Helmet (Secure Header)
+- CORS Headers
+- dotenv
+- e2e and Unit Tests (Jest, Pactum and Mocha)
+
 Frontent (client):
 
 - [Minimal Client](./src/client/minimal/index.html)
