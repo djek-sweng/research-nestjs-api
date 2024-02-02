@@ -31,7 +31,10 @@ export class NoteService {
   }
 
   async getNotes(userId: number) {
-    return await this.db.note.findMany({ where: { userId: userId } });
+    return await this.db.note.findMany({
+      where: { userId: userId },
+      orderBy: { id: 'asc' },
+    });
   }
 
   async updateNote(userId: number, noteId: number, dto: UpdateNoteDto) {
