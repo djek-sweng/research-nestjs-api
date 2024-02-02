@@ -38,21 +38,10 @@ describe('Application (e2e)', () => {
       name: 'test',
       email: 'test@test.com',
       password: 'pasSworD',
+      confirmPassword: 'pasSworD',
     };
 
     describe('Signup', () => {
-      it('should signup', () => {
-        return pactum
-          .spec()
-          .post('/auth/signup')
-          .withBody(signupDto)
-          .expectStatus(HttpStatus.CREATED)
-          .expectBodyContains('access_token')
-          .expectBodyContains('expires_in')
-          .expectBodyContains('user_id');
-        //.inspect();
-      });
-
       it('should throw if email is empty', () => {
         const body = { ...signupDto };
         body.email = '';
@@ -93,6 +82,32 @@ describe('Application (e2e)', () => {
         //.inspect();
       });
 
+      it('should throw if confirm password is empty', () => {
+        const body = { ...signupDto };
+        body.confirmPassword = '';
+
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(body)
+          .expectStatus(HttpStatus.BAD_REQUEST)
+          .expectBodyContains('confirmPassword should not be empty');
+        //.inspect();
+      });
+
+      it('should throw if confirm password fails', () => {
+        const body = { ...signupDto };
+        body.confirmPassword = body.password + '123';
+
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(body)
+          .expectStatus(HttpStatus.FORBIDDEN)
+          .expectBodyContains('Password confirmation failed.');
+        //.inspect();
+      });
+
       it('should throw if name is empty', () => {
         const body = { ...signupDto };
         body.name = '';
@@ -103,6 +118,18 @@ describe('Application (e2e)', () => {
           .withBody(body)
           .expectStatus(HttpStatus.BAD_REQUEST)
           .expectBodyContains('name should not be empty');
+        //.inspect();
+      });
+
+      it('should signup', () => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(signupDto)
+          .expectStatus(HttpStatus.CREATED)
+          .expectBodyContains('access_token')
+          .expectBodyContains('expires_in')
+          .expectBodyContains('user_id');
         //.inspect();
       });
     });
