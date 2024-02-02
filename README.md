@@ -81,3 +81,33 @@ Login:
 - Username: root
 - Password: pasSworD
 - Database: nestjs-api
+
+## Toolchain Requirements and Versions
+
+```sh
+nest --version
+  10.3.0
+
+node --version
+  v20.11.0
+
+npm --version
+  10.4.0
+
+nvm --version
+  0.39.7
+
+docker --version
+  Docker version 25.0.1, build 29cf629
+
+code --version
+  1.86.0
+
+  Useful extensions:
+    archsense.architecture-view-nestjs
+    prisma.prisma
+    ms-azuretools.vscode-docker
+    esbenp.prettier-vscode
+    editorconfig.editorconfig
+    pkief.material-icon-theme
+```
