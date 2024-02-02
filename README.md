@@ -25,6 +25,10 @@ Frontent (client):
 - [Minimal Client](./src/client/minimal/index.html)
 - [Postman Client](./src/client/postman/research-nestjs-api.postman_collection.json)
 
+Database (docker):
+
+- [PostgreSQL](src/server/docker/postgres/docker-compose.yml)
+
 ## Start NestJS API
 
 Install modules, run linter, tests and start application:
