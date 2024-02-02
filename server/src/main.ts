@@ -1,12 +1,14 @@
 import { NestFactory } from '@nestjs/core';
-import { HttpCode, HttpStatus, ValidationPipe } from '@nestjs/common';
+import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 
-const env = new ConfigService().getOrThrow('NODE_ENV');
-const port = new ConfigService().getOrThrow('PORT');
+const config = new ConfigService();
+
+const env = config.getOrThrow('NODE_ENV');
+const port = config.getOrThrow('PORT');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
