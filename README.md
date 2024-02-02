@@ -16,6 +16,7 @@ Backend (server):
 - argon2 (Password Hashing)
 - Helmet (Secure Header)
 - CORS Headers
+- Swagger (OpenAPI Interface)
 - dotenv
 - e2e and Unit Tests (Jest, Pactum and Mocha)
 
@@ -97,6 +98,10 @@ Login:
 - Username: root
 - Password: pasSworD
 - Database: nestjs-api
+
+## Swagger (OpenAPI interface)
+
+http://localhost:5000/swagger
 
 ## Toolchain Requirements and Versions
 
