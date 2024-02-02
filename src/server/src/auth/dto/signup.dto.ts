@@ -7,4 +7,9 @@ export class SignupDto extends SigninDto {
   @IsString()
   @IsNotEmpty()
   name: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  confirmPassword: string;
 }

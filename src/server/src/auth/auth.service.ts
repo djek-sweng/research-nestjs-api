@@ -20,6 +20,10 @@ export class AuthService {
       throw new ForbiddenException('Email already signed up.');
     }
 
+    if (dto.password !== dto.confirmPassword) {
+      throw new ForbiddenException('Password confirmation failed.');
+    }
+
     const passwordHash = await hash(dto.password);
 
     user = await this.db.user.create({
