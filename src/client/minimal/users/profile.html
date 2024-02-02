@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="./../index.html">Back</a>
+      </li>
+    </ul>
+    <h1>User Profile</h1>
+    <div>
+      <div>
+        <label for="id">Id</label>
+        <input type="status" id="id" disabled />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" disabled />
+      </div>
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" />
+      </div>
+      <div>
+        <label for="status">Status</label>
+        <input type="text" id="status" />
+      </div>
+      <button onclick="onClickGet()">Get</button>
+      <button onclick="onClickUpdate()">Update</button>
+    </div>
+    <script>
+      "use strict";
+
+      const _BASE_URL = "http://localhost:5000";
+
+      const _id = document.getElementById("id");
+      const _email = document.getElementById("email");
+      const _name = document.getElementById("name");
+      const _status = document.getElementById("status");
+
+      const onInit = () => {
+        onClickGet();
+      };
+
+      const onClickGet = async () => {
+        try {
+          const token = localStorage.getItem("access_token");
+
+          const res = await fetch(`${_BASE_URL}/users/profile`, {
+            method: "GET",
+            headers: { Authorization: "Bearer " + token },
+          });
+
+          const user = await res.json();
+
+          if (!res.ok) {
+            alert(JSON.stringify(user));
+            return;
+          }
+
+          _id.value = user.id;
+          _email.value = user.email;
+          _name.value = user.name;
+          _status.value = user.status;
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      const onClickUpdate = async () => {
+        try {
+          const token = localStorage.getItem("access_token");
+
+          const payload = {
+            name: _name.value,
+            status: _status.value,
+          };
+
+          const res = await fetch(`${_BASE_URL}/users/profile`, {
+            method: "PATCH",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const user = await res.json();
+
+          if (!res.ok) {
+            alert(JSON.stringify(user));
+            return;
+          }
+
+          _id.value = user.id;
+          _email.value = user.email;
+          _name.value = user.name;
+          _status.value = user.status;
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      onInit();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db-dev:
+    image: postgres:16.1
+    restart: always
+    depends_on:
+      - adminer
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pasSworD
+    ports:
+      - 5432:5432
+
+  db-test:
+    image: postgres:16.1
+    restart: always
+    depends_on:
+      - adminer
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pasSworD
+    ports:
+      - 5433:5432
+
+  db-prod:
+    image: postgres:16.1
+    restart: always
+    depends_on:
+      - adminer
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pasSworD
+    ports:
+      - 5434:5432
+
+  adminer:
+    image: adminer:4.8.1
+    restart: always
+    ports:
+      - 4200:8080
