@@ -43,7 +43,7 @@ npm run db:prod:restart
 npm run start:prod
 ```
 
-## Run PostgresSQL inside Docker
+## Run PostgreSQL inside Docker
 
 ```sh
 # docker compose up/down
@@ -58,7 +58,7 @@ npm run db:prod:down
 npm run docker:down
 ```
 
-## Prisma Studio
+## Prisma Studio (Database Administration)
 
 http://localhost:5555/
 
@@ -69,3 +69,15 @@ npm run prisma:dev:studio
 # ...with NODE_ENV="production"
 npm run prisma:prod:studio
 ```
+
+## Adminer (Database Administration)
+
+http://localhost:4200/
+
+Login:
+
+- System: PostgreSQL
+- Server: db-dev
+- Username: root
+- Password: pasSworD
+- Database: nestjs-api
