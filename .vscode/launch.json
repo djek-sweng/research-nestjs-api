@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "NestJS API",
-      "cwd": "${workspaceFolder}/server",
+      "cwd": "${workspaceFolder}/src/server",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start:debug", "--", "--inspect-brk"],
       "autoAttachChildProcesses": true,
