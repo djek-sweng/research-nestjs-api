@@ -8,6 +8,9 @@ Backend (server):
 
 Frontent (client):
 
+- [Minimal Client](./src/client/minimal/index.html)
+- [Postman Client](./src/client/postman/research-nestjs-api.postman_collection.json)
+
 ## Start NestJS API
 
 Install modules, run linter, test and application:
