@@ -47,7 +47,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"Foo\",\n  \"email\": \"Foo@email.com\",\n  \"password\": \"pasSworD\"\n}",
+									"raw": "{\n  \"name\": \"Foo\",\n  \"email\": \"Foo@email.com\",\n  \"password\": \"pasSworD\",\n  \"confirmPassword\": \"pasSworD\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -166,7 +166,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"Bar\",\n  \"email\": \"Bar@email.com\",\n  \"password\": \"pasSworD\"\n}",
+									"raw": "{\n  \"name\": \"Bar\",\n  \"email\": \"Bar@email.com\",\n  \"password\": \"pasSworD\",\n  \"confirmPassword\": \"pasSworD\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
