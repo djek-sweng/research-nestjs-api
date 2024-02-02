@@ -32,7 +32,7 @@ export class UserController {
     return { status };
   }
 
-  @Patch()
+  @Patch('profile')
   updateUser(@ReqUser('id') userId: number, @Body() dto: UpdateUserDto) {
     return this.userService.updateUser(userId, dto);
   }

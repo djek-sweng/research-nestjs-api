@@ -339,7 +339,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"Alice@email.com\"\n}",
+							"raw": "{\n  \"email\": \"foo@email.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -347,14 +347,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users",
+							"raw": "http://localhost:5000/users/profile",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "5000",
 							"path": [
-								"users"
+								"users",
+								"profile"
 							]
 						}
 					},
@@ -375,14 +376,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users",
+							"raw": "http://localhost:5000/users/profile",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "5000",
 							"path": [
-								"users"
+								"users",
+								"profile"
 							]
 						}
 					},
@@ -403,14 +405,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users",
+							"raw": "http://localhost:5000/users/profile",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "5000",
 							"path": [
-								"users"
+								"users",
+								"profile"
 							]
 						}
 					},

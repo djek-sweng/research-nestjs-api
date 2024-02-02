@@ -304,7 +304,7 @@ describe('Application (e2e)', () => {
       it('should update profile', () => {
         return pactum
           .spec()
-          .patch('/users')
+          .patch('/users/profile')
           .withHeaders(headers)
           .withBody(dto)
           .expectStatus(HttpStatus.OK)
@@ -323,7 +323,7 @@ describe('Application (e2e)', () => {
       it('should throw unauthorized (w/o headers)', () => {
         return pactum
           .spec()
-          .patch('/users')
+          .patch('/users/profile')
           .withHeaders({})
           .withBody(dto)
           .expectStatus(HttpStatus.UNAUTHORIZED)
