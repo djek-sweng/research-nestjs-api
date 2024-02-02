@@ -25,8 +25,6 @@ nest g controller auth --no-spec
 ## Run Postgres inside Docker
 
 ```sh
-npm install
-
 # dev environment
 npm run db:dev:restart
 
