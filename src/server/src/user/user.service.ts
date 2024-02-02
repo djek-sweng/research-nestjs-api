@@ -9,7 +9,7 @@ export class UserService {
   async updateUser(userId: number, dto: UpdateUserDto) {
     const user = await this.db.user.update({
       where: { id: userId },
-      data: { ...dto, email: dto.email.toLowerCase() },
+      data: { ...dto },
     });
 
     delete user.passwordHash;
