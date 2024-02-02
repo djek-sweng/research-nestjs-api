@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { JwtAuthGuard } from './../auth/guard';
@@ -32,7 +32,7 @@ export class UserController {
     return { status };
   }
 
-  @Put('profile')
+  @Patch()
   updateUser(@ReqUser('id') userId: number, @Body() dto: UpdateUserDto) {
     return this.userService.updateUser(userId, dto);
   }
