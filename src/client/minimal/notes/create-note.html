@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Note</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="./../index.html">Back</a>
+      </li>
+    </ul>
+    <h1>Create Note</h1>
+    <div>
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" value="My note title" />
+      </div>
+      <div>
+        <label for="content">Content</label>
+        <input type="text" id="content" value="My note content" />
+      </div>
+      <div>
+        <label for="tag">Tag</label>
+        <input type="text" id="tag" value="My note tag" />
+      </div>
+      <button onclick="onClick()">Create</button>
+    </div>
+    <script>
+      "use strict";
+
+      const _BASE_URL = "http://localhost:5000";
+
+      const _title = document.getElementById("title");
+      const _content = document.getElementById("content");
+      const _tag = document.getElementById("tag");
+
+      const onInit = () => {};
+
+      const onClick = async () => {
+        try {
+          const token = localStorage.getItem("access_token");
+
+          const payload = {
+            title: _title.value,
+            content: _content.value,
+            tag: _tag.value,
+          };
+
+          const res = await fetch(`${_BASE_URL}/notes`, {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const note = await res.json();
+
+          if (!res.ok) {
+            alert(JSON.stringify(note));
+            return;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      onInit();
+    </script>
+  </body>
+</html>

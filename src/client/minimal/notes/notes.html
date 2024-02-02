@@ -39,6 +39,7 @@
           <th>Id</th>
           <th>Title</th>
           <th>Content</th>
+          <th>Tag</th>
           <th>UserId</th>
         </tr>
       </thead>
@@ -89,7 +90,8 @@
         row.insertCell(1).innerHTML = note.id;
         row.insertCell(2).innerHTML = note.title;
         row.insertCell(3).innerHTML = note.content;
-        row.insertCell(4).innerHTML = note.userId;
+        row.insertCell(4).innerHTML = note.tag;
+        row.insertCell(5).innerHTML = note.userId;
       };
 
       onInit();
