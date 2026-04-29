@@ -21,7 +21,7 @@ Backend (server):
 - dotenv
 - e2e and Unit Tests (Jest, Pactum and Mocha)
 
-Frontent (client):
+Frontend (client):
 
 - [Minimal Client](./src/client/minimal/index.html)
 - [Postman Client](./src/client/postman/research-nestjs-api.postman_collection.json)
